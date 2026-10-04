@@ -1,0 +1,38 @@
+name: turaista
+description: "TurAIsta — offline multilingual assistant for small farm-tour hosts."
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.7.0
+
+# Core logic is dependency-free on purpose. Add on-device ML packages only when
+# needed, with `flutter pub add` (see .claude/skills/offline-translation).
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_tts: 4.2.5
+  google_mlkit_language_id: 0.15.1
+  google_mlkit_translation: 0.15.1
+  llamadart: 0.10.0
+  path_provider: ^2.1.6
+  speech_to_text: 7.5.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+# llamadart downloads prebuilt llama.cpp at build time. CPU llama.cpp only:
+# no LiteRT-LM and no Vulkan, to keep the APK and memory small.
+hooks:
+  user_defines:
+    llamadart:
+      llamadart_native_runtimes: [llama_cpp]
+      llamadart_native_backends: [cpu]
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/profiles/example_farm.json
+    - assets/fixtures/inquiries.jsonl
