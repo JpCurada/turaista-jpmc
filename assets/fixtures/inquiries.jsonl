@@ -1,0 +1,30 @@
+{"id": "ko-price-booking", "lang": "ko", "expect": "draft", "message": "안녕하세요, 다음 주 토요일에 4명이 방문할 수 있나요? 가격은 얼마인가요?"}
+{"id": "en-directions", "lang": "en", "expect": "draft", "message": "Hi! How do we get to the farm from Baguio?"}
+{"id": "en-allergy", "lang": "en", "expect": "blocked", "message": "My son has a severe peanut allergy. Is the farm lunch safe for him?"}
+{"id": "ja-price", "lang": "ja", "expect": "draft", "message": "ツアーの料金はいくらですか？"}
+{"id": "en-unknown", "lang": "en", "expect": "blocked", "message": "Can we camp overnight on the mountain trail?"}
+{"id": "en-price-typo", "lang": "en", "expect": "draft", "message": "Hi! whats the pric for the coffee tour? thx"}
+{"id": "en-coffee-toddler", "lang": "en", "expect": "blocked", "message": "Is the coffee picking walk OK for toddlers? We have a 2 year old."}
+{"id": "en-booking-group", "lang": "en", "expect": "draft", "message": "Hello, we are a group of 6 friends. Is it possible to reserve the tour for next Sunday morning?"}
+{"id": "en-diabetic-in-price", "lang": "en", "expect": "blocked", "message": "How much is the farm lunch? My mother is diabetic so she needs to know what's in it."}
+{"id": "en-dog-and-price", "lang": "en", "expect": "blocked", "message": "Can we bring our dog? Also how much is the entrance fee?"}
+{"id": "en-jeepney-directions", "lang": "en", "expect": "draft", "message": "Which jeepney do we take from Baguio to get to your farm? Is there a landmark near the road?"}
+{"id": "en-refund-rain", "lang": "en", "expect": "blocked", "message": "If it rains and the tour is cancelled, do we get a refund on the fee?"}
+{"id": "en-mobility-booking", "lang": "en", "expect": "blocked", "message": "Can my dad join the tour? He uses a walker and can't do steep slopes. We'd like to book for 3."}
+{"id": "en-payment-price", "lang": "en", "expect": "blocked", "message": "Do you accept credit card or GCash for the tour price?"}
+{"id": "en-shellfish-nuts", "lang": "en", "expect": "blocked", "message": "Does the farm lunch have any shellfish or nuts in it? Price too please."}
+{"id": "en-allergy-typo", "lang": "en", "expect": "blocked", "message": "my daughter has a peanut alergy, how much is lunch for kids?"}
+{"id": "ko-booking-price", "lang": "ko", "expect": "draft", "message": "안녕하세요! 이번 주 금요일에 성인 3명 예약 가능할까요? 1인당 가격도 알려주세요."}
+{"id": "ko-kids-safety-in-price", "lang": "ko", "expect": "blocked", "message": "아이 둘(5살, 7살)이랑 가려고 하는데 아이들한테 안전한가요? 가격은요?"}
+{"id": "ko-directions-taxi", "lang": "ko", "expect": "blocked", "message": "바기오에서 농장까지 어떻게 가나요? 택시 타면 되나요?"}
+{"id": "ko-vegetarian-lunch", "lang": "ko", "expect": "blocked", "message": "점심 식사에 고기가 들어가나요? 저는 채식주의자예요."}
+{"id": "ko-parking", "lang": "ko", "expect": "blocked", "message": "주차장 있나요? 렌터카로 갈 예정이에요."}
+{"id": "ja-roasting-price", "lang": "ja", "expect": "draft", "message": "コーヒーの焙煎体験の料金はいくらですか？ツアー代とは別ですか？"}
+{"id": "ja-pregnant-trail", "lang": "ja", "expect": "blocked", "message": "妊娠中ですが、坂道のトレイルは歩けますか？料金も教えてください。"}
+{"id": "ja-booking", "lang": "ja", "expect": "draft", "message": "来週の月曜日に2名で予約できますか？"}
+{"id": "ja-halal", "lang": "ja", "expect": "blocked", "message": "ランチはハラールに対応していますか？"}
+{"id": "zh-price", "lang": "zh", "expect": "draft", "message": "你好，请问参观咖啡农场一个人多少钱？"}
+{"id": "zh-vegetarian-in-price", "lang": "zh", "expect": "blocked", "message": "我们是素食者，午餐有素食吗？价格是多少？"}
+{"id": "zh-directions", "lang": "zh", "expect": "draft", "message": "从碧瑶怎么去你们的农场？"}
+{"id": "zh-elderly-booking", "lang": "zh", "expect": "blocked", "message": "我奶奶80岁了，走山路安全吗？可以预订周六吗？"}
+{"id": "zh-drone", "lang": "zh", "expect": "blocked", "message": "可以在农场里用无人机拍照吗？"}

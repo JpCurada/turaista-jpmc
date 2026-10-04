@@ -1,0 +1,23 @@
+{
+  "farm_name": "Lorna's Highland Coffee Farm",
+  "location_hint": "From Baguio, take the Halsema Highway north to the km 42 marker, then turn left at the blue waiting shed. Cross the small bridge; the farm gate is 200 m on the right.",
+  "host": {
+    "preferred_address": "Manang Lorna",
+    "language": "tl",
+    "use_po": true,
+    "voice": null,
+    "simple_explanations": true
+  },
+  "base_price_php": 350,
+  "max_group_size": 12,
+  "activities": [
+    {"name": "Coffee picking walk", "price_php": 0, "duration_minutes": 60, "description": "Included in base tour"},
+    {"name": "Coffee roasting workshop", "price_php": 200, "duration_minutes": 45},
+    {"name": "Farm lunch", "price_php": 250}
+  ],
+  "safety_rules": [
+    "Closed-toe shoes required on the slope trail",
+    "Children under 12 must stay with an adult",
+    "No tours during heavy rain"
+  ]
+}
