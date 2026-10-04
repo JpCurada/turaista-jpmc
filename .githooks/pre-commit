@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# Enabled by `make setup` (git config core.hooksPath .githooks)
+set -euo pipefail
+
+staged=$(git diff --cached --name-only --diff-filter=ACM)
+[ -z "$staged" ] && exit 0
+
+# Model weights are only allowed through Git LFS (see .gitattributes).
+weights=$(echo "$staged" | grep -E '\.(tflite|onnx|gguf|safetensors|bin)$' || true)
+for f in $weights; do
+  if [ "$(git check-attr filter -- "$f" | awk '{print $NF}')" != "lfs" ]; then
+    echo "✖ $f is a model file not tracked by Git LFS. Keep it in models/ (git-ignored)."; exit 1
+  fi
+done
+if echo "$staged" | grep -Eq '(^|/)(\.env|key\.properties|google-services\.json|GoogleService-Info\.plist)$|\.(jks|keystore)$'; then
+  echo "✖ Secrets or signing files are staged. Unstage them."; exit 1
+fi
+
+dart_files=$(echo "$staged" | grep -E '\.dart$' || true)
+if [ -n "$dart_files" ]; then
+  echo "▶ dart format"
+  # shellcheck disable=SC2086
+  dart format --output=none --set-exit-if-changed $dart_files
+  echo "▶ TurAIsta rules (no hard-coded prices, pure-Dart core)"
+  # An empty package config skips the app's native build hooks; the script only
+  # uses dart:io, so it needs no packages.
+  # shellcheck disable=SC2086
+  dart --packages=.githooks/empty_package_config.json .claude/hooks/rules_check.dart \
+    --files $dart_files
+  echo "▶ flutter analyze"
+  flutter analyze --no-pub
+fi
+
+py_files=$(echo "$staged" | grep -E '^model_tools/.*\.py$' || true)
+if [ -n "$py_files" ] && command -v uv >/dev/null 2>&1; then
+  echo "▶ ruff (model_tools)"
+  (cd model_tools && uv run ruff format --check . && uv run ruff check .)
+fi

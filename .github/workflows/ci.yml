@@ -1,0 +1,33 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  flutter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: dart format --output=none --set-exit-if-changed lib test tool .claude/hooks
+      - run: flutter analyze
+      - run: dart run .claude/hooks/rules_check.dart --files $(find lib -name '*.dart')
+      - run: flutter test
+      - run: dart run tool/demo.dart
+
+  model-tools:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: model_tools
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync          # dev tools only; the heavy [export] extra is skipped
+      - run: uv run ruff format --check .
+      - run: uv run ruff check .

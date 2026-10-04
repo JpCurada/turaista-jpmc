@@ -1,0 +1,2 @@
+# The on-device intent model is stored with Git LFS (see README, "Setting up the phone").
+*.gguf filter=lfs diff=lfs merge=lfs -text
