@@ -16,6 +16,10 @@ Built with Flutter for the World Bank **Small AI** hackathon, tourism track (Ann
 Install the APK with `adb install -r app-release.apk`, or open it on the phone and allow
 installs from unknown sources.
 
+GitHub Actions also builds the APK (workflow **Release APK**). Push a tag such as `v0.2.0` to
+publish it on the [Releases page](https://github.com/JpCurada/turaista-jpmc/releases), or run
+the workflow by hand from the Actions tab to get it as a download on that run.
+
 ---
 
 ## Table of contents

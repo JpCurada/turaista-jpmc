@@ -1,0 +1,72 @@
+name: Release APK
+
+# Builds the arm64 release APK with the intent model inside.
+# - Manual run (Actions tab, "Run workflow"): the APK is attached to the run as an artifact.
+# - Tag push (e.g. v0.2.0): the APK is also published on the GitHub Release for that tag.
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+
+      # The model is 531 MB in Git LFS and free LFS bandwidth is 1 GB a month,
+      # so cache it and only download it when it changes.
+      - name: List LFS objects
+        run: git lfs ls-files --long | cut -d ' ' -f1 | sort > .lfs-assets-id
+      - name: Restore LFS cache
+        uses: actions/cache@v4
+        with:
+          path: .git/lfs
+          key: lfs-${{ hashFiles('.lfs-assets-id') }}
+      - name: Pull LFS objects
+        run: git lfs pull
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+      - run: flutter test
+      - name: Build APK
+        run: flutter build apk --release --target-platform android-arm64
+
+      - name: Name the APK
+        run: |
+          name="turaista-${GITHUB_REF_NAME//\//-}-arm64.apk"
+          mv build/app/outputs/flutter-apk/app-release.apk "$name"
+          sha256sum "$name" > "$name.sha256"
+          echo "APK=$name" >> "$GITHUB_ENV"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.APK }}
+          path: |
+            ${{ env.APK }}
+            ${{ env.APK }}.sha256
+          compression-level: 0
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ${{ env.APK }}
+            ${{ env.APK }}.sha256
+          generate_release_notes: true
