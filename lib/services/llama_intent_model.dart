@@ -12,7 +12,12 @@ import 'package:turaista/core/intent_model.dart';
 /// decoding, a grammar that forces the short JSON shape, and a fixed system
 /// prompt first so llama.cpp can reuse its cache between messages.
 class LlamaIntentModel implements IntentModel {
-  LlamaIntentModel(this.path, {Future<bool> Function()? prepare}) : _prepare = prepare;
+  LlamaIntentModel(this.path, {Future<bool> Function()? prepare, this.grammar = intentGrammar})
+    : _prepare = prepare;
+
+  /// GBNF output grammar: [intentGrammar] (intent and slots) or the faster
+  /// [intentOnlyGrammar].
+  final String grammar;
 
   static const String fileName = 'turaista-intent-v2-q8_0.gguf';
 
@@ -94,12 +99,12 @@ class LlamaIntentModel implements IntentModel {
       final out = StringBuffer();
       await for (final chunk in engine.generate(
         _prompt(guestMessage),
-        params: const GenerationParams(
+        params: GenerationParams(
           maxTokens: 80,
           temp: 0,
           topK: 1,
           penalty: 1.0,
-          grammar: intentGrammar,
+          grammar: grammar,
           stopSequences: ['<|im_end|>'],
           reusePromptPrefix: true,
         ),

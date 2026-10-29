@@ -29,6 +29,14 @@ str    ::= "\"" ( [^"\\] | "\\" ["\\/bfnrt] )* "\""
 ws     ::= [ ]?
 ''';
 
+/// Same JSON shape with empty slots: the model only picks the intent, so it
+/// writes far fewer tokens. Use where speed matters more than slot notes.
+const String intentOnlyGrammar = r'''
+root   ::= "{" ws "\"intent\":" ws intent "," ws "\"slots\":" ws "{}" ws "}"
+intent ::= "\"BOOKING\"" | "\"PRICE\"" | "\"DIRECTIONS\"" | "\"DIETARY_SAFETY\"" | "\"OTHER\""
+ws     ::= [ ]?
+''';
+
 /// Slot names the model may fill.
 const Set<String> intentSlotNames = {'party_size', 'date', 'time', 'place', 'item', 'allergen'};
 
