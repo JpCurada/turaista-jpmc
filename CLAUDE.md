@@ -36,9 +36,9 @@ platform/ML in `lib/services`, screens in `lib/features/<stage>/`, fixtures in `
 
 ## Claude Code setup
 - Skills: `grounded-replies`, `intent-taxonomy`, `offline-translation`, `host-onboarding`,
-  `flutter-architecture`
+  `flutter-architecture`, `research-paper`
 - Agents: `on-device-ml-engineer`, `flutter-ui-engineer`, `guardrail-auditor` (read-only),
-  `filipino-localization-reviewer` (read-only), `demo-scenario-tester`
+  `filipino-localization-reviewer` (read-only), `demo-scenario-tester`, `researcher`
 - Hooks (Dart, in `.claude/hooks/`): protect secrets/weights/lockfiles/host data, format +
   analyze every edited Dart file, enforce no-hard-coded-prices and pure core, run
   `flutter test` on Stop, inject rules at session start.
